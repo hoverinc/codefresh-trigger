@@ -1,0 +1,17 @@
+version: '1.0'
+
+stages:
+  - prepare
+  - build
+
+steps:
+  main_clone:
+    stage: prepare
+    type: git-clone
+    repo: "${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}"
+    revision: "${{CF_BRANCH}}"
+  test:
+    stage: build
+    image: node:10.16.3-alpine
+    commands:
+      - node -e "console.log('build')"
